@@ -1,0 +1,7 @@
+# Pastas geradas
+frames/
+output/
+
+# Arquivos temporários
+*.png
+*.mp4
