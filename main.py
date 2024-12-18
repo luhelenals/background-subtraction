@@ -25,7 +25,7 @@ def apply_background_sub(frames):
     results_median = [cv2.absdiff(frame, background_median) for frame in frames]
 
     # Salvar os resultados para cada modelo
-    for i, frame in enumerate(frames):
+    for i in range(len(frames)):
         # Fundo fixo
         cv2.imwrite(os.path.join(output_folder, f"fixed_frame_{i}.png"), results_fixed[i])
         # Média
@@ -37,7 +37,9 @@ def apply_background_sub(frames):
 
 def get_frames():
     # Obter a lista de frames
-    frame_files = sorted([f for f in os.listdir(frame_folder) if f.endswith('.png')])
+    frame_files = sorted(
+        [f for f in os.listdir(frame_folder) if f.endswith('.png')],
+        key=lambda x: int(x.replace('frame_', '').replace('.png', '')))
     if not frame_files:
         raise ValueError("Nenhum frame encontrado na pasta de entrada.")
     
